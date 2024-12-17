@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import "./Navbar.css";
-import Icon from "../../../assets/icon.png";
-import menuIcon from "../../../assets/menuIcon.svg";
-import Button from '../Button/Button';
+import "./NavBar.css";
+import Icon from "../../assets/icon.png";
+// import menuIcon from "../../assets/menuIcon.svg";
+import Button from '../Buttons/Buttons';
 import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 
-const appTopText = "The health and well-being of our patients and their health care team will always be our priority, so we follow the best practices for cleanliness.";
+text = "The health and well-being of our patients and their health care team will always be our priority, so we follow the best practices for cleanliness.";
 
 const Navbar = (props) => {
     const { atHomePage, atFindPage, atBookingsPage, backColor, showAppTop = true } = props;
@@ -98,13 +98,13 @@ const Navbar = (props) => {
           
             {showAppTop && (
                 <div className="AppTop">
-                    <marquee direction="left" className="appTopSlide">
-                        {appTopText}
+                    <marquee direction="left" >
+                        {text}
                     </marquee>
                 </div>
             )}
 
-            {/* Navbar Section */}
+       
             <nav className={`${backColor}`}>
                 <div className="commonContainer">
                     <div className="mainNav">
@@ -118,7 +118,7 @@ const Navbar = (props) => {
                             <Button
                                 clickFuntion={handleMenuClick}
                                 buttonClass="whiteButton inheritBackground"
-                                icon={menuIcon}
+                              
                             />
                         </div>
                         <div className="navBody">

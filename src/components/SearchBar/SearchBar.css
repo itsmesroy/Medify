@@ -1,9 +1,4 @@
 
-
-
-
-
-
 .SearchBar{
     display: flex;
     align-items: center;
@@ -17,8 +12,7 @@
     flex: 1;
     background-color: #F0F0F0;
     outline: none;
-    border: none;
-    /* max-width: 326px; */
+    border: none;    
     border: 1px solid #ABB6C7;
     padding: 0.5rem 1rem;
     display: flex;
@@ -33,8 +27,8 @@
     outline: none;
     border: none;
     background-color: inherit;
-    font-size: 0.875rem;/* font-size: 14px; */
-    /* color: #ABB6C7; */
+    font-size: 0.875rem;
+
 }
 
 .SearchPop{
@@ -70,8 +64,7 @@
 }
 
 
-.rotateLoad{
-    /* background-color: red; */
+.rotateLoad{    
     animation: rotate 2s forwards infinite;
 }
 

@@ -1,19 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
 import "./SearchBar.css";
-import searchIcon from "../.././assets/searchIcon.png";
-import locationMarker from "../../../assets/locationMarker.png";
-import loadingIcon from "../../../assets/loadingIcon.svg";
-import Button from "../Button/Button";
-import { findLocations, findBookings } from "../../functions/functions";
-import { BookingsContext, FoundHospitalsContext } from "../../contexts/AllContexts";
+import searchIcon from "../../assets/searchIcon.png";
+import locationMarker from "../../assets/locationMarker.png";
+import loadingIcon from "../../assets/loadingIcon.svg";
+import Button from "../Buttons/Buttons";
+import { findLocations, findBookings } from "../../Functions/Functions";
+import { BookingsContext, FoundHospitalsContext } from "../../Contexts/Contexts";
 
 const api = "https://meddata-backend.onrender.com";
 
 const SearchBar = ({ atBookingsPage, customClass }) => {
     const [bookings] = useContext(BookingsContext);
     const [foundHospitals, setFoundHospitals] = useContext(FoundHospitalsContext);
-
 
     const [stateName, setStateName] = useState("");
     const [cityName, setCityName] = useState("");
@@ -27,18 +25,17 @@ const SearchBar = ({ atBookingsPage, customClass }) => {
 
     const allStates = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","DC","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","PR","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","VI","Wyoming","AS","GU","MP"]; 
 
-
     const fetchData = async (type, state) => {
         if (type === "cities") {
             setFetching(true);
-            const response = await axios.get(`${api}/cities/${state}`);
-            setAllCities(response.data);
+            const filteredCities = findLocations(allCities, state);
+            setAllCities(filteredCities);
             setFetching(false);
         }
         if (type === "hospitals") {
             setFetching(true);
-            const response = await axios.get(`${api}/data?state=${stateName}&city=${cityName}`);
-            setFoundHospitals({ hospitals: response.data, stateName, cityName });
+            const filteredHospitals = findBookings(bookings, hospitalName);
+            setFoundHospitals({ hospitals: filteredHospitals, stateName, cityName });
             setFetching(false);
         }
     };
@@ -47,21 +44,16 @@ const SearchBar = ({ atBookingsPage, customClass }) => {
         const { name, value } = e.target;
         if (name === "state") {
             setStateName(value);
-            const filtered = findLocations(allStates, value);
-            setFilteredStates(filtered);
-            setCityName(""); 
             fetchData("cities", value);
         } else if (name === "city") {
             setCityName(value);
-            const filtered = findLocations(allCities, value);
-            setFilteredCities(filtered);
+            fetchData("hospitals", value);
         } else if (name === "hospital") {
             setHospitalName(value);
             const filtered = findBookings(bookings, value);
             setFilteredHospitals(filtered);
         }
     };
-
 
     const renderSuggestions = () => {
         if (atBookingsPage && hospitalName) {
@@ -88,17 +80,15 @@ const SearchBar = ({ atBookingsPage, customClass }) => {
     const handleSuggestionClick = (value) => {
         if (stateName) {
             setStateName(value);
-            setFilteredStates([]);
             fetchData("cities", value);
         } else {
             setCityName(value);
-            setFilteredCities([]);
+            fetchData("hospitals", value);
         }
     };
 
     return (
         <form className={`SearchComp ${customClass}`} onSubmit={(e) => e.preventDefault()}>
- 
             {!atBookingsPage && (
                 <div className="inputWrapper">
                     <img src={locationMarker} alt="location" />
@@ -113,7 +103,6 @@ const SearchBar = ({ atBookingsPage, customClass }) => {
                 </div>
             )}
 
-    
             {!atBookingsPage && (
                 <div className={`inputWrapper ${fetching ? "disableInput" : ""}`}>
                     <img src={fetching ? loadingIcon : locationMarker} alt="loading" className={fetching ? "rotate" : ""} />
@@ -129,7 +118,6 @@ const SearchBar = ({ atBookingsPage, customClass }) => {
                 </div>
             )}
 
-  
             {atBookingsPage && (
                 <div className="inputWrapper">
                     <img src={searchIcon} alt="search" />
@@ -144,7 +132,6 @@ const SearchBar = ({ atBookingsPage, customClass }) => {
                 </div>
             )}
 
-    
             <div className="SearchPop">{renderSuggestions()}</div>
 
             <Button

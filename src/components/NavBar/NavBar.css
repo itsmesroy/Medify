@@ -226,30 +226,12 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* position: fixed;
-    left: 0;
-    right: 0;
-    top: 0; */
-    /* position: relative;
-    overflow: hidden; */
+    position:fixed;
 }
 
 
-.appTopSlide{
-    /* position: absolute;
-    width: 1000px; */
-}
 
-@media screen and (max-width: 1004px){
-    .appTopSlide{
-        /* color: rebeccapurple;
-        left: 0; */
-    }
-}
 
-@keyframes marquee {
-    
-}
 /* below 1200px */
 @media screen and (max-width: 1200px) {
     .BookingSearch, .NavSearch{

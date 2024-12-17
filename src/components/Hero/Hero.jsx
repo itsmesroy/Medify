@@ -1,20 +1,19 @@
 import React from 'react';
 import heroImage from "../../assets/doctors.png";
-import Button from '../Button/Button';
+import Button from '../Buttons/Buttons';
 import SearchComp from '../SearchComp/SearchComp';
 import CommonSubText from '../CommonSubText/CommonSubText';
 import { Link } from 'react-router-dom';
 import "./Hero.css";
 
-// Text Constants
+
 const tagLine = "Skip the travel! Find Online";
 const subText = "Connect instantly with a 24x7 specialist or choose to video visit a particular doctor.";
 
 const Hero = () => {
     return (
         <div className='Hero'>
-            <div className='commonContainer heroBody'>
-                {/* Left Text Content */}
+            <div className='commonContainer heroBody'>                
                 <div className='heroTexts'>
                     <h4 className='heroTagline'>{tagLine}</h4>
                     <h1 className='heroHeadline'>
@@ -31,11 +30,10 @@ const Hero = () => {
                     </Link>
                 </div>
 
-                {/* Right Image Content */}
                 <div className='heroImgDiv'>                   
                     <img 
                         src={heroImage} 
-                        alt='Doctors assisting patients' 
+                        alt='Doctors' 
                         className='heroImage'
                     />
                 </div>

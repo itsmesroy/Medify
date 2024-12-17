@@ -1,6 +1,6 @@
 import React from 'react';
 //styles
-import "./Button.css";
+import "./Buttons.css";
 
 const Button = ({text, buttonClass, icon, clickFunction, formSubmit, rotateIcon}) => {
     return (
