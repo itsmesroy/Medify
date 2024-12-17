@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
-//styles
 import "./Navbar.css";
-import "./AppTop.css"; // Include AppTop styles here
-//assets
 import Icon from "../../../assets/icon.png";
 import menuIcon from "../../../assets/menuIcon.svg";
-//components
 import Button from '../Button/Button';
 import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 
-// AppTop text
 const appTopText = "The health and well-being of our patients and their health care team will always be our priority, so we follow the best practices for cleanliness.";
 
 const Navbar = (props) => {
-    //props
     const { atHomePage, atFindPage, atBookingsPage, backColor, showAppTop = true } = props;
-    //states
     const [menuPoisition, setMenuPosition] = useState("hideMenu");
-    //variables
     const navLinks = ["Find Doctors", "Hospitals", "Medicines", "Surgeries", "Software for Provider", "Facilities"];
-    //functions
+  
     const displayLinks = () => {
         return navLinks.map((item) => {
             let goto = "#";
@@ -79,7 +71,7 @@ const Navbar = (props) => {
         </div>;
     };
 
-    //sub-components
+
     const NavSearch = () => {
         if (atFindPage)
             return (
@@ -103,7 +95,7 @@ const Navbar = (props) => {
 
     return (
         <>
-            {/* AppTop Section */}
+          
             {showAppTop && (
                 <div className="AppTop">
                     <marquee direction="left" className="appTopSlide">
